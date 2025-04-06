@@ -8,7 +8,7 @@ echo "Please enter the pass of the users file";
 read user_input_path;
 echo "$user_input_path";
 users_output_path="users_output_path.txt";
-echo "1";
+
 
 > "$users_output_path";
 echo "2"
