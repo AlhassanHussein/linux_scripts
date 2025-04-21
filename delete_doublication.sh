@@ -2,7 +2,7 @@
 
 
 folder_path=".";
-
+#read only mkv files.
 for file_mkv in *.mkv;
 do
 	prefix_file_mkv="${file_mkv:0:3}";
