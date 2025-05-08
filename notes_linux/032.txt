@@ -1,0 +1,26 @@
+PID > 1 systemd (system diamon)
+first process start in the system and lead all next her
+but before was init but is not good as systemd.
+RedHad who create systemd.
+
+ps > show me the process in this terminal 
+ps -a | ps a > show all process in diffrent terminals.
+echo $$ >> get process ID. FOR TERMINAL.
+ps au >> show me all process with extra information 
+ps aux >> more information background.
+kill PID >> kill any process.
+kill -l >> show you many options like to kill or to stop or to frezz the processkill -15 >> is the default kill -15 = kill = kill -SIGTERM.
+ps -ef | less >> another way to show the process that is working in the system
+ps -fax > another way to show the process as a tree.
+pstree > same as above but more styled.
+pidof vim > get pid of vim or another app 
+pkill >> is same as kill and default is -15 but here kill by name not pid (kill vim).
+kill -20 ==> ctrl + z.
+$firefox and then ctrl z >> [1] stopped >> is paused in background to return to forground first check (jobs)>> [1] stopped just to show you applications that is paussed or stoped. then to return it.$ fg %1.
+ctrl + c ==> kill -2.
+$firefox& >> open firefox and put it in background not fg to be able to use the shell again.
+fg &1 | fg %1 >> to chose if the process be in background of the shell or forground of the shell.
+
+
+
+

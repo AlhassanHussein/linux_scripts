@@ -1,0 +1,163 @@
+					NMCLI IS BSD (WITHOUT DASH).
+
+
+ifconfig | /sbin/ifconfig | sudo ifconfig >> is old package 
+i have to download it and install it 
+sudo apt install net-tools
+but new one is $ip address show. is the default now in all system.
+$ip address == ip address show. default is show.
+$ip link show >> two or more result we will have 
+1) lo:<LOOPBACK> >>> this is virsual network card. 
+even if remove all netwrok card. i will still have virsual network card
+and this is important i have a server and want to test something the server is listening to a network so he will listen to LOOPBACK and to see that i can ping in myself 127.0.0.1.
+
+2) enp7s0 >> not only this name can change is depend how many way you can conect to internet with wire or wifi and even if VMWARE.
+but for now enp7s0 <NO - CARRIER > Is mean ethernet (en is for ethernet)
+(s0 is for slot 0) (enp7s0 ==> en ETHERNET p PORT 7  SLOT 0).
+ens1 >> en ETHERNET/ s1 >> SLOT 1
+eno1 >> en ETHERNET/ o1 >> onborad (built-in).
+
+3)wl6s0 <BROADCAS> IS mean wifi . (wl is for wireless LAN).
+				    (s0 is for slot 0).
+we could have diffrent like (eno3 is for onboard 3).is mean on matherborad mean built in.
+
+also MAC ADDRESS IS : link/ether 78:0c:b8:0c:bf:7a
+
+-----------------------------------------------------------
+
+ifconfig is old package the new one is ip address show | ip a s | ip addr sh.
+
+if i want to see the STATISTIC >> ip -s link show wl6s0.
+$ip -s link show >> will show all models.
+is to show RX & TX
+$ip route>> is to see the route. routing  is mean like i have my pc where he send the data go through wifi and send it to this router whois ip this.
+as i understand is like you want to send data to place like london for example 
+and this data need to go out from you machine or OS will go through what
+ethernet or wifi and to what router
+
+default via 192.168.1.1 dev wlp6s0 proto dhcp src 192.168.1.172 metric 600 
+192.168.1.0/24 dev wlp6s0 proto kernel scope link src 192.168.1.172 metric 600 
+
+$ cat /etc/resolve.conf>> is to get my DNS.
+
+$nmcli (network manager cli) >> this is the new tool before they were doing all this with files to enter the file manoulay and do it now not 
+just (nmcli) and chose what you want to do 
+for example:
+we can create a wifi profile for home and work. one for 4g and another 5 g and more let's see.
+
+$nmcli devices status >>>
+
+mrnext@next:~$ nmcli device status 
+DEVICE          TYPE      STATE                   CONNECTION       
+wlp6s0          wifi      connected               Campos Home 2.4G 
+lo              loopback  connected (externally)  lo               
+p2p-dev-wlp6s0  wifi-p2p  disconnected            --               
+enp7s0          ethernet  unavailable             --    
+what is mean is mean that we want to see ours device that is connected to system
+for example we have wifi is connected to wifi name campos home.
+lo is alwyas connected to be alwasys connected.
+the other is not like ethernet or other.
+
+
+mrnext@next:~$ nmcli connection show 
+NAME                UUID                                  TYPE      DEVICE 
+Campos Home 2.4G    57939af3-c099-4a3a-91cb-f7a8c0943169  wifi      wlp6s0 
+lo                  875f19b6-fb8f-4635-bc05-8d34867935f1  loopback  lo     
+Madrid              fd676ea4-3721-4c9e-8374-4601db60fc59  wifi      --     
+Privato             1cbbb6a8-afa5-4f5d-8e67-22b0ebb6cb17  wifi      --     
+Wired connection 1  3988cee5-7e73-3174-93cd-9f81e4913369  ethernet  --  
+
+is almost same with nmcli device status why becz device show show me all device is connected and the status and here also is telling me whice device is in
+connection yes not all device only who is connected and not just that is also
+show me what connection i did before Madrid is wifi i did before Privato is my
+hotspot from my phone and right connection campos.
+
+is almost all of them same 
+nmcli connection show == device status 
+
+and this will show me all connection but if i want more information about a specific 
+connection easy just
+nmcli connection show (name of the network).
+
+
+
+
+and every device from this has a profile for example if we chose privato 
+i alwas use 5g from my phone to laptop and Madrid is 5g also and campos 2.4g
+so every connection has a profile and we can see that how down.
+
+$nmcli connection show (name of device: Madrid, Privato, campos home)
+$nmcli connection show Madrid. i will see 186 option and i can edit all of them
+like what this  option for example autoconect wifi id and more more.
+ALSO WE CAN SEE THEM HOW 
+$nmcli connectoin add TAP
+mrnext@next:~$ nmcli connection add 
+Display all 117 possibilities? (y or n)
+IMPORTANT NOTE NOW IS 117 BEFORE WAS LESS SO IS DEPEND ON YOUR SYSTEM.
+
+let's try to make a profile for example:
+$nmcli connection add con-name (network name) argument with BSD syntacs.
+
+mrnext@next:~$ nmcli connection add con-name hassnwifi type wifi ifname wlp6s0 autoconnect yes ssid "1234"
+
+and if we nmcli connection show we will find our new hassanwifi connection. and we can connected anytime 
+(((((((((((((((((((((( BETTER PROFILE ))))))))))))))))))
+$nmcli connection add con-name "HASSAN HOME WIFI" type wifi ifname wlp6s0 autoconnect yes ssid "Campos Home 2.4G" wifi-sec.key-mgmt wpa-psk wifi-sec.psk "0xf2bf067c24"
+
+con-name >>> any name i want to set just me make me what profile i am using 
+ifname >>> to choce what device i will select wifi or ethernet or what is connected to my machine.(interface name).	kj
+autconnect is mean if reboot this profile we be up automaticaly.
+ssid >>> is the name of the network that i will connect.
+wiif-sec.keymgmt >>> type of the connection is wap1/2/3/4.
+wifi-sec.psk>>> the password if the network not requeired wifi not need to set wifi-sec.psk
+
+and now we can see our profile from 
+$nmcli connection show oooooorrrrr nmcli connection show "HASSAN HOME WIFI" orrrrrrrrrrrrr nmcli device show wlp6s0
+
+now we know how to add a connection NEW to edit we will do nmcli connection modify (network name ) TAP to see option.
+
+
+after creating the profile i want to connect my internet so up to connect and down to disconnect
+$nmcli connection up/down  (profile name)
+
+
+THERE ARE MANY OTHER OPTIOONS ALSO IMPORTANT TAB TO SEE.
+
+all this information saved in a file to access this file 
+
+$cat/nano/vim (use sudo to not get access denied) /etc/NetworkManager/system-connection/(all profiles will be here).
+
+i tried to check in my system but i could not find. CHATGPT >> ??
+
+$hostname 
+next
+to change hostname
+$hostname "new name"
+but will be temperiory or Transient hostname: hello
+and if restart my system will be avalible anymore
+to see the manager or hostname
+$hostnamectl >> i will see all information about my device machine.
+and to set hostname for ever even after reboot.
+$hostnamectl set-hostname "new name"
+
+also i can change all this with GUI nmcli
+HOW?
+$nmtui (network manager text user interface).
+
+
+--------------------------------------------------------------------------------------------------
+how to ping >> ping is like to conect to a specifi ip to see if will replay or avalible or not
+ping (ip) / ping 19.4.56.2 >> but will ping for ever if i add -c4 it will ping  4 times only i want 6 >> ping (ip) -c6.
+
+
+also there ss what is ss?
+
+ss  is used to dump socket statistics. It allows showing information similar to netstat.  It can display more TCP and
+state information than other tools.
+
+also there is something called tracepath >>
+
+
+
+
+

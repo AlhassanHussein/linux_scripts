@@ -1,0 +1,74 @@
+gzip >> faster but bad compressing
+bzipz >> meduim speed but better compressing
+xz >> slow speed but best compressing
+
+who to use?
+compressing 			decompressing
+
+gzip file.gz			gzip -d file.gz (gunzip file.gz)
+bzip2 file.bz2			bzip2 -d file.bz2 (bunzip2 file.bz2)
+xz file.xz 			xz -d file.xz (unxz file.xz)
+
+we can use (time) function to know what time it take.
+for example:
+
+time xz file.txt   || time xz -d file.txt.xz.
+-d: decompressing
+-k: keep input file
+-f: force and overwirete if the file exits.
+-z: is default to compressing.
+-v: verbose.
+
+------------------------------------------
+tar || archiving >>> is mean if you have a directory and this dir have 
+alot of files every file will take one inode so maybe wtih time you wont
+find enough inode maybe you have space but you do not have inode plus
+you want to copy this dir with archiving is more faster.
+so is usful to save inode and save time for copy or move.
+
+HOW TO USE: 
+
+tar -c new_file.tar file_want_to_archive.tar
+tar -x file_want_to_dearchive.tar
+options:
+-f: file
+-c: create tar
+-x extract tar
+-t: list all tar you have in a dir path
+-v: verbose
+
+IMPORTANT NOTE:
+-cfv != -cvf 
+remember always -f comes after the file name so it must be -cvf file_name.tar
+also if i extracte  without sudo all files be belong to me as owner 
+so must be with sudo becz he have the power to chage the owner value also group owner.
+| Command                     | Resulting Ownership               |
+| --------------------------- | --------------------------------- |
+| `tar -xf` (as user)         | Files owned by **you**            |
+| `sudo tar -xf`              | Files owned by **original users** |
+| `sudo tar --same-owner -xf` | Ensures original ownership        |
+
+
+----------------------ARCHIVE & COMPRESS ONE COMMAND--------------
+sudo tar -czf etc_dd.tar.gz /etc/
+sudo tar -cjf etc_dd.tar.bz2 /etc/
+sudo tar -cJf etc_dd.tar.xz /etc/
+
+z: gzip
+j: bzip2
+J: xz
+to extracte the archive and compress eassy
+sodo tar -xzf etc_dd.tar.xz >> x to extracte and decompress.
+
+
+
+
+
+************ IS ONLY FOR FILES NOT MP3 OR MP4 JUST TEST***********
+
+
+
+
+
+
+

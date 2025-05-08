@@ -1,0 +1,15 @@
+$top >> date, time of machine running. 1 user login , load av:last 1m,5,15m.
+zombie > life and dead> parent is dead but child is running 
+R > Running. S> Sleep. Z>zombie
+$top >> h will show me all information that i need to edit 
+$top >> k >> to kill process with the id default is 15.
+$top >> f >> is to add a new coulum or to remove by space.
+$top >> w to save the editing to be able to find again.
+to return to default sitting check where is the path when you save the sitting
+by default will be in ~/.config/procps/toprc but first just check where you wil save your sitting and go to this file path and remove it.
+====================
+		-20---------nice(0)---------19
+	hight priority      normal     lowest priority
+$nice -n 15 firefox) >> is mean is not very importnat 
+we can renice it.
+$renice -n -15 firefox >> is very important now. 

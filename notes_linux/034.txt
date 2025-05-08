@@ -1,0 +1,60 @@
+			control servies & daemons
+boot process
+1) POST> power onself test. BIOS / UEFI (NEW)
+this check all (RAM/ROM/HDD..) if there is isuue will give a sound every sound mean a specific issue. EVERY THING OKAY GO NEXT 2.
+2)find bootable devices --> compare settings 
+check all connected devices like CD|HDD|FLASHMEMORY >> even if all of them have a bootable program he will go to see what what the user giving him as a order.
+to boot from hard or cd or falsh or what ever. even if PXE (netwrok).
+3) load IPL >> Initail program loader >> this is responsable to execute the bootloader then 
+4) start or load boot loader. we have alot and most famous is 
+grub2 | grub > grand unified boot loader. and this is my hard disk . (MBR).
+5)BOOT LOADER GRUNB2 > start boot kernel.
+6)start init (old)>> new is systemd
+7)systemd call services daemons.
+=================================
+				INIT VS SYSTEMD
+	INIT:
+SERVICES ------1------2------3 			SERVICES ----1
+services by services 				 here not all once ------2
+							------4
+SHELL Scripts every service
+have her own syntacs and is diffcult 		Unit files ( does not have much 						codes)
+code is diffcult and alot			var = value.
+					  	in trubale shoting is easy. becz						when the system start to start 							journald start with is it. that 						if there are any fail happen   							recorad in journald log	
+						systemctl(system control).
+						systemctl stop/start/enable/disable
+to open or to stop 
+every commands is diffrent			here is not
+
+
+systemctl list-units -type=path >>> ==== systemctl -l -t socket.
+is to show you all services you have in your machine.
+systemctl -list-unit-files>> is to show you the services if disabled or enabled.
+
+for example we have a services alled (cron) >> this is respensible to schudel a specific a task.
+if you want to do a task in specific time we will use cron services. 
+to see this service or another (cron | crond) is depend on the disrabution.
+systemctl status cron | crond.>> also is cron or crond or cron.services
+
+two things important
+1) active: running  >> can be running now. and can not be as i want 
+2)enabled >> if i reboot the machine and is enabled will be active running but if disabled what ever happen won't be active at all.
+systemctl stop crond >> won't be active anymore and will be dead.but if reboot will be running automaticaly becz is enabled.
+		    >> from active running to inactive (dead).
+systemctl disable cron.services >> now won't be enabled and will be disabled even if reboot will be for ever disabled until me change that. and how he disabled he not remove the services no he just remove the symlink who look to the services it self
+Removed "/etc/systemd/system/multi-user.target.wants/cron.service".
+if want to enable it.
+systemctl enable cron >> now will be enabled and create the link.
+Created symlink /etc/systemd/system/multi-user.target.wants/cron.service → /usr/lib/systemd/system/cron.service.
+systemctl enable cron --now ======>> systemctl enable cron && systemctl start cron.
+systemctl is-enabled cron / systemctl is....
+system restart cron >> to turn it off and then to turn it on again 
+but i'm doing something in this service will be droped | stopped.
+so what is better is to do reload.
+systemctl reload cron >> well i try to us it but is not work. is think they remove it chatGPT says is not need to reload becz is automaticaly dedacte any change.
+systemctl mask cron >>> this is important if i have a service like cron i do not want anyone even if admin to enable it or active it so i do it maskthat no one can enable what ever happen. Created symlink /etc/systemd/system/cron.service → /dev/null.
+
+===================== and to know what is default of any package look at preset: enable/disabled.
+
+$systemctl unmask cron.service.
+
